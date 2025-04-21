@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Configuration & State (remain the same) ---
-  const apiKey = 'eacc73ab9261fcee9b1146019d49d625'; 
+  // --- Configuration ---
+  const apiKey = 'eacc73ab9261fcee9b1146019d49d625'; // <-- PASTE YOUR V3 API KEY HERE!
   const baseUrl = 'https://api.themoviedb.org/3';
   const baseImageUrl = 'https://image.tmdb.org/t/p/w500';
-  const profileImageUrl = 'https://image.tmdb.org/t/p/w185';
-  const moviesPerPage = 20; // TMDb default and matches request
+  const profileImageUrl = 'https://image.tmdb.org/t/p/w185'; // For cast images
 
+  // --- State ---
+  // (currentPage, currentFilters, totalPages, genresMap remain the same)
   let currentPage = 1;
   let currentFilters = {
       genre: '',
@@ -16,14 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let totalPages = 1;
   let genresMap = {};
 
-  // --- DOM Elements (Add Back to Top Button) ---
+  // --- DOM Elements ---
   // (Existing elements remain)
   const genreFilterEl = document.getElementById('genreFilter');
   const ratingFilterEl = document.getElementById('ratingFilter');
   const yearFilterEl = document.getElementById('yearFilter');
   const sortCriteriaEl = document.getElementById('sortCriteria');
   const movieGridEl = document.getElementById('movieGrid');
-  const loadingIndicatorEl = document.getElementById('loadingIndicator'); // Keep for initial load/errors
+  const loadingIndicatorEl = document.getElementById('loadingIndicator');
   const errorMessageEl = document.getElementById('errorMessage');
   const paginationControlsEl = document.getElementById('paginationControls');
   const prevPageBtn = document.getElementById('prevPage');
@@ -31,15 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPageSpan = document.getElementById('currentPage');
   const resetFiltersBtn = document.getElementById('resetFilters');
   const currentYearSpan = document.getElementById('currentYear');
+  // Modal Elements
   const modalEl = document.getElementById('movieDetailModal');
   const modalBodyEl = document.getElementById('modalBody');
   const modalCloseBtn = modalEl.querySelector('.modal-close-btn');
   const modalOverlay = modalEl.querySelector('.modal-overlay');
-  const backToTopBtn = document.getElementById('backToTopBtn'); // New element
 
-  // --- API Functions (remain the same) ---
+
+  // --- API Functions ---
   async function fetchFromTMDB(endpoint, params = {}, includeApiKey = true) {
-      // ... (keep existing implementation) ...
       const url = new URL(`${baseUrl}/${endpoint}`);
       if (includeApiKey) {
           url.searchParams.append('api_key', apiKey);
@@ -52,23 +53,25 @@ document.addEventListener('DOMContentLoaded', () => {
           }
       }
 
+      // Centralized Fetch Logic (keep existing try/catch/finally)
       try {
+          // Note: Loading indicator handled specifically for grid vs modal
           errorMessageEl.style.display = 'none';
           const response = await fetch(url);
           if (!response.ok) {
-              const errorData = await response.json().catch(() => ({}));
+              const errorData = await response.json().catch(() => ({})); // Try to get error details
               throw new Error(`HTTP error! status: ${response.status} ${response.statusText} - ${errorData.status_message || 'Unknown API error'}`);
           }
           return await response.json();
       } catch (error) {
           console.error(`Error fetching ${endpoint}:`, error);
-          throw error;
+          // Error display handled by calling function (grid or modal)
+          throw error; // Re-throw for calling function to handle UI
       }
   }
 
   async function fetchGenres() {
-      // ... (keep existing implementation) ...
-       try {
+      try {
           const data = await fetchFromTMDB('genre/movie/list');
           if (data && data.genres) {
               genresMap = data.genres.reduce((map, genre) => {
@@ -78,12 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
               populateGenreFilter(data.genres);
           }
       } catch (error) {
+           // Handle genre fetch error if needed (e.g., show message)
            console.error("Failed to fetch genres.");
       }
   }
 
   async function fetchMovies() {
-      showLoading(true); // Use skeleton loader now
+      showLoading(true); // Show main grid loading
+      movieGridEl.innerHTML = ''; // Clear grid before fetch
       errorMessageEl.style.display = 'none';
 
       const params = {
@@ -99,26 +104,27 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
           const data = await fetchFromTMDB('discover/movie', params);
           if (data) {
-              renderMovies(data.results); // Render actual movies
+              renderMovies(data.results);
               totalPages = data.total_pages > 500 ? 500 : data.total_pages;
               updatePagination();
                if (data.results.length === 0) {
                   showError("No movies found matching your criteria.");
-                  updatePagination(true);
+                  updatePagination(true); // Disable pagination
               }
           }
       } catch (error) {
           showError(`Failed to load movies: ${error.message}`);
           updatePagination(true);
       } finally {
-          showLoading(false); // Hide skeleton loader
+          showLoading(false); // Hide main grid loading
       }
   }
 
+  // NEW: Fetch detailed movie info including credits
   async function fetchMovieDetails(movieId) {
-      // ... (keep existing implementation) ...
       showModalLoading(true);
       try {
+          // Append credits directly to the movie details request
           const data = await fetchFromTMDB(`movie/${movieId}`, { append_to_response: 'credits' });
           renderModal(data);
       } catch (error) {
@@ -128,9 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   }
 
+
   // --- Rendering Functions ---
   function populateGenreFilter(genres) {
-      // ... (keep existing implementation) ...
+      // (Keep existing implementation)
       genreFilterEl.innerHTML = '<option value="">All Genres</option>';
       genres.forEach(genre => {
           const option = document.createElement('option');
@@ -141,14 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderMovies(movies) {
-      // No need to clear here, skeleton loader handles the placeholder state
-      if (!movies) return;
+      // Clear only if needed (already cleared in fetchMovies)
+      // movieGridEl.innerHTML = '';
+      if (!movies) return; // Should be handled by caller, but safe check
 
       movies.forEach(movie => {
-          // ... (keep existing card creation logic) ...
-           const card = document.createElement('div');
+          const card = document.createElement('div');
           card.className = 'movie-card';
-          card.dataset.movieId = movie.id;
+          card.dataset.movieId = movie.id; // <<< ADD MOVIE ID HERE
 
           const imageUrl = movie.poster_path
               ? `${baseImageUrl}${movie.poster_path}`
@@ -166,8 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
+  // NEW: Render Modal Content
   function renderModal(movie) {
-      // ... (keep existing implementation) ...
       if (!movie) {
           renderModalError("Movie data not found.");
           return;
@@ -182,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rating = movie.vote_average > 0 ? movie.vote_average.toFixed(1) : 'N/A';
       const runtime = movie.runtime ? `${movie.runtime} min` : 'N/A';
 
+      // Render Cast (limit to ~10-12 for brevity)
       const cast = movie.credits?.cast || [];
       const castHtml = cast.slice(0, 12).map(actor => `
           <div class="cast-member">
@@ -223,12 +231,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderModalError(message) {
-       // ... (keep existing implementation) ...
        modalBodyEl.innerHTML = `<div class="modal-loading error-message">${message}</div>`;
   }
 
+
   function updatePagination(disable = false) {
-       // ... (keep existing implementation) ...
+       // (Keep existing implementation)
        if (disable || totalPages <= 1) {
            paginationControlsEl.style.display = 'none';
            return;
@@ -239,100 +247,109 @@ document.addEventListener('DOMContentLoaded', () => {
       nextPageBtn.disabled = currentPage >= totalPages;
   }
 
-  // UPDATED: Show Skeleton Loaders
   function showLoading(isLoading) {
-      loadingIndicatorEl.style.display = 'none'; // Hide old text indicator
-      errorMessageEl.style.display = 'none'; // Hide errors when loading starts
-
+      // (Keep existing implementation for main grid loading)
+      loadingIndicatorEl.style.display = isLoading ? 'block' : 'none';
       if (isLoading) {
-          movieGridEl.innerHTML = ''; // Clear previous results
-          renderSkeletonLoaders(moviesPerPage); // Show placeholders
-      } else {
-          clearSkeletonLoaders(); // Remove placeholders after loading
+          movieGridEl.innerHTML = ''; // Clear grid when loading starts
+          errorMessageEl.style.display = 'none';
       }
   }
 
-  // NEW: Render Skeleton Loaders
-  function renderSkeletonLoaders(count) {
-      for (let i = 0; i < count; i++) {
-          const skeletonCard = document.createElement('div');
-          skeletonCard.className = 'skeleton-card';
-          skeletonCard.innerHTML = `
-              <div class="skeleton-img"></div>
-              <div class="skeleton-content">
-                  <div class="skeleton-text"></div>
-                  <div class="skeleton-text short"></div>
-              </div>
-          `;
-          movieGridEl.appendChild(skeletonCard);
-      }
-  }
-
-  // NEW: Clear Skeleton Loaders
-  function clearSkeletonLoaders() {
-      const skeletons = movieGridEl.querySelectorAll('.skeleton-card');
-      skeletons.forEach(skeleton => skeleton.remove());
-  }
-
-
+  // NEW: Show loading state specifically for the modal
   function showModalLoading(isLoading) {
-      // ... (keep existing implementation) ...
       if (isLoading) {
           modalBodyEl.innerHTML = `<div class="modal-loading">Loading details...</div>`;
       }
+      // No need to hide it explicitly, as renderModal/renderModalError replaces the content
   }
 
    function showError(message) {
-      clearSkeletonLoaders(); // Clear skeletons if error occurs
-      movieGridEl.innerHTML = ''; // Ensure grid is empty
+      // (Keep existing implementation for main grid errors)
+      movieGridEl.innerHTML = ''; // Clear grid on error
       errorMessageEl.textContent = message;
       errorMessageEl.style.display = 'block';
   }
 
-  // --- Modal Control Functions (remain the same) ---
+  // --- Modal Control Functions ---
   function openModal() {
-      // ... (keep existing implementation) ...
       modalEl.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
   }
 
   function closeModal() {
-      // ... (keep existing implementation) ...
       modalEl.classList.remove('active');
-      document.body.style.overflow = '';
-      modalBodyEl.innerHTML = '';
+      document.body.style.overflow = ''; // Restore background scrolling
+      modalBodyEl.innerHTML = ''; // Clear content when closing
   }
 
-  // --- Event Handlers (remain the same, add Back to Top) ---
-  function handleFilterChange() { /* ... */ }
-  function handleSortChange() { /* ... */ }
-  function handleResetFilters() { /* ... */ }
-  function goToPrevPage() { /* ... */ }
-  function goToNextPage() { /* ... */ }
-  function handleMovieCardClick(event) { /* ... */ }
 
-  // NEW: Scroll Event Listener for Back to Top Button
-  function handleScroll() {
-      if (window.scrollY > 300) { // Show button after scrolling down 300px
-          backToTopBtn.classList.add('visible');
-      } else {
-          backToTopBtn.classList.remove('visible');
+  // --- Event Handlers ---
+  function handleFilterChange() {
+      // (Keep existing implementation)
+      currentFilters.genre = genreFilterEl.value;
+      currentFilters.minRating = parseFloat(ratingFilterEl.value);
+      currentFilters.year = yearFilterEl.value.trim();
+      currentPage = 1;
+      fetchMovies();
+  }
+
+  function handleSortChange() {
+      // (Keep existing implementation)
+      currentFilters.sortBy = sortCriteriaEl.value;
+      currentPage = 1;
+      fetchMovies();
+  }
+
+  function handleResetFilters() {
+      // (Keep existing implementation)
+      genreFilterEl.value = "";
+      ratingFilterEl.value = "0";
+      yearFilterEl.value = "";
+      sortCriteriaEl.value = "popularity.desc";
+
+      currentFilters.genre = '';
+      currentFilters.minRating = 0;
+      currentFilters.year = '';
+      currentFilters.sortBy = 'popularity.desc';
+      currentPage = 1;
+      fetchMovies();
+  }
+
+  function goToPrevPage() {
+      // (Keep existing implementation)
+      if (currentPage > 1) {
+          currentPage--;
+          fetchMovies();
+          window.scrollTo(0, 0);
       }
   }
 
-  // NEW: Click Handler for Back to Top Button
-  function scrollToTop() {
-      window.scrollTo({
-          top: 0,
-          behavior: 'smooth' // Smooth scrolling animation
-      });
+  function goToNextPage() {
+      // (Keep existing implementation)
+      if (currentPage < totalPages) {
+          currentPage++;
+          fetchMovies();
+          window.scrollTo(0, 0);
+      }
   }
+
+  // NEW: Handle clicks on movie cards using Event Delegation
+  function handleMovieCardClick(event) {
+      const card = event.target.closest('.movie-card'); // Find the nearest movie card ancestor
+      if (card && card.dataset.movieId) {
+          const movieId = card.dataset.movieId;
+          openModal();
+          fetchMovieDetails(movieId);
+      }
+  }
+
 
   // --- Initialization ---
   function init() {
       if (!apiKey || apiKey === 'YOUR_TMDB_API_KEY') {
            showError("API Key Missing! Please add your TMDb API key to script.js.");
-           showLoading(false); // Ensure skeleton loaders are cleared if API key missing
+           showLoading(false);
            updatePagination(true);
            return;
       }
@@ -347,15 +364,18 @@ document.addEventListener('DOMContentLoaded', () => {
       resetFiltersBtn.addEventListener('click', handleResetFilters);
       prevPageBtn.addEventListener('click', goToPrevPage);
       nextPageBtn.addEventListener('click', goToNextPage);
+
+      // Modal Listeners
       modalCloseBtn.addEventListener('click', closeModal);
       modalOverlay.addEventListener('click', closeModal);
+
+      // Movie Grid Click Listener (Event Delegation)
       movieGridEl.addEventListener('click', handleMovieCardClick);
-      backToTopBtn.addEventListener('click', scrollToTop); // Add listener for back to top
-      window.addEventListener('scroll', handleScroll); // Add scroll listener
+
 
       // Fetch initial data
       fetchGenres().then(() => {
-          fetchMovies();
+          fetchMovies(); // Fetch movies only after genres might be loaded
       });
   }
 
