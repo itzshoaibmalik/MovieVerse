@@ -1,80 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - MovieVerse</title>
-    <link rel="stylesheet" href="style.css"> 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - MovieVerse</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="about-page">
 
-     <header>
-        <div class="container">
-            <a href="index.html" class="logo">MovieVerse</a>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Movies</a></li>
-                    <li><a href="#">Genres</a></li>
-                    <li><a href="#">TV Shows</a></li>
-                    <li><a href="about.html" class="active">About Us</a></li>
-                </ul>
-            </nav>
-            <div class="user-actions">
-                <a href="login.html" class="btn btn-secondary">Login</a>
-                <a href="signup.html" class="btn btn-primary">Sign Up</a>
-            </div>
-             <button id="mobileMenuToggle" class="mobile-menu-toggle">☰</button>
-        </div>
-    </header>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">MovieVerse</a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Movies</a></li>
+          <li><a href="#">Genres</a></li>
+          <li><a href="#">TV Shows</a></li>
+          <li><a href="about.html" class="active">About Us</a></li>
+        </ul>
+      </nav>
+      <div class="user-actions">
+        <a href="login.html" class="btn btn-secondary">Login</a>
+        <a href="signup.html" class="btn btn-primary">Sign Up</a>
+      </div>
+      <button id="mobileMenuToggle" class="mobile-menu-toggle">☰</button>
+    </div>
+  </header>
 
-    <main class="container">
-        <h1>About MovieVerse</h1>
+  <main class="container">
+    <h1>About MovieVerse</h1>
 
-        <section class="content-section">
-            <h2>Our Mission</h2>
-            <p>MovieVerse aims to be your ultimate destination for discovering and exploring movies. Whether you're looking for the latest blockbusters, hidden gems, or timeless classics, we provide the tools to filter, sort, and find exactly what you're in the mood for.</p>
-            <p>We believe finding your next favorite movie should be an enjoyable and seamless experience.</p>
-        </section>
+    <section class="content-section">
+      <h2>Our Mission</h2>
+      <p>MovieVerse aims to be your ultimate destination for discovering and exploring movies. Whether you're looking
+        for the latest blockbusters, hidden gems, or timeless classics, we provide the tools to filter, sort, and find
+        exactly what you're in the mood for.</p>
+      <p>We believe finding your next favorite movie should be an enjoyable and seamless experience.</p>
+    </section>
 
-        <section class="content-section">
-            <h2>How It Works</h2>
-            <p>Our extensive movie catalog is powered by <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">The Movie Database (TMDb)</a>, a community-built movie and TV database.</p>
-            <p>We utilize the TMDb API to bring you up-to-date information, including:</p>
-            <ul>
-                <li>Movie posters and details (overview, release date, runtime)</li>
-                <li>Ratings and genres</li>
-                <li>Cast and crew information</li>
-                <li>Trending and popular movie lists</li>
-            </ul>
-            <p>Our filtering and sorting options allow you to narrow down choices based on your preferences.</p>
-        </section>
+    <section class="content-section">
+      <h2>How It Works</h2>
+      <p>Our extensive movie catalog is powered by <a href="https://www.themoviedb.org/" target="_blank"
+          rel="noopener">The Movie Database (TMDb)</a>, a community-built movie and TV database.</p>
+      <p>We utilize the TMDb API to bring you up-to-date information, including:</p>
+      <ul>
+        <li>Movie posters and details (overview, release date, runtime)</li>
+        <li>Ratings and genres</li>
+        <li>Cast and crew information</li>
+        <li>Trending and popular movie lists</li>
+      </ul>
+      <p>Our filtering and sorting options allow you to narrow down choices based on your preferences.</p>
+    </section>
 
-        <section class="content-section">
-          <h2>Technology & Credits</h2>
-          <p>This website was created by Shoaib Malik using modern web technologies:</p> <!-- Added owner name -->
-          <ul>
-              <li>HTML5 for structure</li>
-              <li>CSS3 (including Flexbox and Grid) for styling and layout</li>
-              <li>JavaScript for interactivity and fetching data from the TMDb API</li>
-          </ul>
-           <p><em>Please note: This is a frontend demonstration. Features like user accounts (Login/Signup) and saving watchlists would require a backend server and database.</em></p>
-      </section>
+    <section class="content-section">
+      <h2>Technology & Credits</h2>
+      <p>This website was created by Shoaib Malik using modern web technologies:</p> <!-- Added owner name -->
+      <ul>
+        <li>HTML5 for structure</li>
+        <li>CSS3 (including Flexbox and Grid) for styling and layout</li>
+        <li>JavaScript for interactivity and fetching data from the TMDb API</li>
+      </ul>
+      <p><em>Please note: This is a frontend demonstration. Features like user accounts (Login/Signup) and saving
+          watchlists would require a backend server and database.</em></p>
+    </section>
 
-    </main>
+  </main>
 
-    <footer>
-         <div class="container">
-          <p>© <span id="currentYear"></span> MovieVerse by Shoaib Malik. Powered by <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDb</a>.</p>
-             <div class="footer-links">
-                <a href="about.html">About</a> | <a href="#">Contact</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms</a>
-            </div>
-        </div>
-         <script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
-    </footer>
+  <footer>
+    <div class="container">
+      <p>© <span id="currentYear"></span> MovieVerse by Shoaib Malik. Powered by <a href="https://www.themoviedb.org/"
+          target="_blank" rel="noopener">TMDb</a>.</p>
+      <div class="footer-links">
+        <a href="about.html">About</a> | <a href="#">Contact</a> | <a href="#">Privacy Policy</a> | <a
+          href="#">Terms</a>
+      </div>
+    </div>
+    <script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+  </footer>
 
 </body>
+
 </html>

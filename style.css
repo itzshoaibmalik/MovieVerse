@@ -14,6 +14,8 @@
   --border-color: #dee2e6;
   --font-family: 'Poppins', sans-serif;
   --header-height: 70px; /* Adjusted header height */
+  --primary-color-rgb: 13, 110, 253; /* RGB for rgba usage */
+  --subtle-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); /* Subtle gradient */
 }
 
 * {
@@ -28,6 +30,8 @@ body {
   color: var(--text-color);
   background-color: var(--body-bg);
   font-size: 16px; /* Base font size */
+  background: var(--subtle-bg); /* Apply subtle gradient */
+
 }
 
 .container {
@@ -67,6 +71,8 @@ img { max-width: 100%; display: block; }
   font-size: 1rem;
   border-radius: 0.25rem;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncier transition */
+
 }
 .btn:disabled {
   opacity: 0.65;
@@ -120,11 +126,142 @@ header .container {
   width: 100%; /* Ensure container takes full width */
 }
 
+
+.filter-group select,
+.filter-group input[type="number"],
+.sorting select,
+#resetFilters {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; /* Add transitions */
+}
+.filter-group select:focus,
+.filter-group input[type="number"]:focus,
+.sorting select:focus {
+     border-color: var(--primary-color);
+     box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2);
+}
+
+/* --- Movie Card (Hover Refinement) --- */
+.movie-card {
+    /* ... existing card styles ... */
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.movie-card:hover {
+    transform: translateY(-10px) scale(1.03); /* More pronounced hover */
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+/* --- Skeleton Loader Styles --- */
+.skeleton-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.skeleton-img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+}
+.skeleton-content {
+    padding: 15px;
+}
+.skeleton-text {
+    height: 1.1em; /* Match h3 height */
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 4px;
+}
+.skeleton-text.short {
+    height: 0.9em; /* Match p height */
+    width: 60%; /* Shorter line */
+    margin-bottom: 0;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* --- Movie Detail Modal (Animation) --- */
+.modal-content {
+    /* ... existing styles ... */
+    transform: translateY(20px) scale(0.98); /* Start slightly lower and smaller */
+    transition: transform 0.35s ease-out, opacity 0.3s ease-out; /* Smoother ease-out */
+}
+.modal.active .modal-content {
+    transform: translateY(0) scale(1); /* Animate to final position */
+}
+
+/* --- Back to Top Button --- */
+#backToTopBtn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 998; /* Below modal overlay */
+    background-color: rgba(var(--primary-color-rgb), 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+    line-height: 50px; /* Center arrow vertically */
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+#backToTopBtn.visible {
+    opacity: 1;
+    visibility: visible;
+}
+#backToTopBtn:hover {
+    background-color: rgba(var(--primary-color-rgb), 1);
+    transform: scale(1.1);
+}
+#backToTopBtn:active {
+    transform: scale(1);
+}
+
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+
+
+
+
+
 header .logo {
   font-size: 1.8em;
   font-weight: 700;
   color: var(--light-color);
   text-decoration: none;
+  font-weight: 700; /* Make it bolder */
+  font-size: 1.9em; /* Slightly larger */
+  color: #ffffff; /* Explicitly white */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Subtle shadow for contrast */
+  
 }
 header .logo:hover { text-decoration: none; }
 
@@ -446,6 +583,8 @@ footer a:hover { color: #fff; }
 .btn:hover {
   transform: translateY(-2px); /* Subtle lift */
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: translateY(-3px) scale(1.02); /* Slightly more lift and scale */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
 }
 .btn:active {
   transform: translateY(0px); /* Press down effect */

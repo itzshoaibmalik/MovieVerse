@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <header>
@@ -28,12 +30,12 @@
                 <a href="login.html" class="btn btn-secondary">Login</a>
                 <a href="signup.html" class="btn btn-primary">Sign Up</a>
             </div>
-             <button id="mobileMenuToggle" class="mobile-menu-toggle">☰</button>
+            <button id="mobileMenuToggle" class="mobile-menu-toggle">☰</button>
         </div>
     </header>
 
     <!-- (Hero Section remains the same) -->
-     <section class="hero">
+    <section class="hero">
         <div class="hero-content container">
             <h1>Discover Your Next Favorite Movie</h1>
             <p>Explore thousands of titles, powered by TMDb.</p>
@@ -70,7 +72,7 @@
                         <label for="yearFilter">Release Year:</label>
                         <input type="number" id="yearFilter" placeholder="e.g., 2023" min="1900" max="2025">
                     </div>
-                     <button id="resetFilters" class="btn btn-danger" type="button">Reset</button>
+                    <button id="resetFilters" class="btn btn-danger" type="button">Reset</button>
                 </div>
 
                 <div class="sorting">
@@ -102,12 +104,17 @@
         </div>
     </main>
 
+    <!-- ==== BACK TO TOP BUTTON ==== -->
+    <button id="backToTopBtn" title="Go to top">↑</button>
+    <!-- ==== END BACK TO TOP BUTTON ==== -->
     <!-- Footer remains the same, maybe add About link -->
     <footer>
         <div class="container">
-            <p>© <span id="currentYear"></span> MovieVerse by Shoaib Malik. Powered by <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDb</a>.</p>
+            <p>© <span id="currentYear"></span> MovieVerse by Shoaib Malik. Powered by <a
+                    href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDb</a>.</p>
             <div class="footer-links">
-                <a href="about.html">About</a> | <a href="#">Contact</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms</a>
+                <a href="about.html">About</a> | <a href="#">Contact</a> | <a href="#">Privacy Policy</a> | <a
+                    href="#">Terms</a>
             </div>
         </div>
     </footer>
@@ -128,4 +135,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
