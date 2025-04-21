@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MovieVerse</title>
+    <link rel="stylesheet" href="style.css"> <!-- Reuse main stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+
+    <header class="simple-header"> <!-- Optional simple header -->
+         <div class="container">
+            <a href="index.html" class="logo">MovieVerse</a>
+         </div>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <h1>Login</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <!-- Add forgot password link if needed -->
+            </form>
+            <p class="auth-switch-link">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- Optional Simple Footer -->
+    <footer>
+        <div class="container">
+             <p>© <span id="currentYear"></span> MovieVerse.</p>
+        </div>
+         <script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+    </footer>
+
+    <!-- Add script for form submission handling (backend needed) -->
+    <script>
+        // Basic form submission prevention (replace with actual logic)
+        document.getElementById('loginForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Login functionality requires a backend!');
+            // Here you would typically send data to your server
+        });
+    </script>
+
+</body>
+</html>
