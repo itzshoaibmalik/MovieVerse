@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieVerse - Discover Movies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo">MovieVerse</a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">Genres</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button>Login</button>
+                <button class="signup">Sign Up</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Discover Your Next Favorite Movie</h1>
+            <p>Explore thousands of titles, tailored to your taste.</p>
+            <div class="search-container">
+                <input type="search" placeholder="Search movies, actors, directors...">
+                <button>Search</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="filter-sort-controls">
+        <div class="container">
+            <div class="controls-wrapper">
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="genreFilter">Genre:</label>
+                        <select id="genreFilter" multiple>
+                            <option value="action">Action</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="drama">Drama</option>
+                            <option value="horror">Horror</option>
+                            <option value="romance">Romance</option>
+                            <option value="sci-fi">Sci-Fi</option>
+                            <option value="thriller">Thriller</option>
+                        </select>
+                        <small>(Hold Ctrl/Cmd to select multiple)</small>
+                    </div>
+                    <div class="filter-group">
+                        <label for="ratingFilter">Min Rating:</label>
+                        <select id="ratingFilter">
+                            <option value="0">Any</option>
+                            <option value="9">9+</option>
+                            <option value="8">8+</option>
+                            <option value="7">7+</option>
+                            <option value="6">6+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="yearFilter">Release Year:</label>
+                        <input type="number" id="yearFilter" placeholder="e.g., 2023" min="1900" max="2024">
+                    </div>
+                     <button id="resetFilters" type="button">Reset Filters</button>
+                </div>
+
+                <div class="sorting">
+                    <label for="sortCriteria">Sort By:</label>
+                    <select id="sortCriteria">
+                        <option value="popularity-desc">Popularity</option> <!-- Default -->
+                        <option value="rating-desc">Rating (High to Low)</option>
+                        <option value="rating-asc">Rating (Low to High)</option>
+                        <option value="date-desc">Release Date (Newest)</option>
+                        <option value="date-asc">Release Date (Oldest)</option>
+                        <option value="title-asc">Title (A-Z)</option>
+                        <option value="title-desc">Title (Z-A)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="movie-grid-container">
+        <div class="container">
+            <div id="movieGrid" class="movie-grid">
+                <!-- Movie Cards will be dynamically filtered/sorted, but here's the structure: -->
+
+                <div class="movie-card" data-title="Inception" data-year="2010" data-rating="8.8" data-genres='["action", "sci-fi", "thriller"]'>
+                    <img src="https://via.placeholder.com/200x300/FFA500/000000?text=Inception" alt="Inception Poster">
+                    <h3>Inception</h3>
+                    <p class="year">2010</p>
+                    <p class="rating">⭐ 8.8</p>
+                    <div class="genres">
+                        <span>Action</span><span>Sci-Fi</span><span>Thriller</span>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-title="The Dark Knight" data-year="2008" data-rating="9.0" data-genres='["action", "drama", "thriller"]'>
+                    <img src="https://via.placeholder.com/200x300/808080/FFFFFF?text=The+Dark+Knight" alt="The Dark Knight Poster">
+                    <h3>The Dark Knight</h3>
+                    <p class="year">2008</p>
+                    <p class="rating">⭐ 9.0</p>
+                    <div class="genres">
+                        <span>Action</span><span>Drama</span><span>Thriller</span>
+                    </div>
+                </div>
+
+                 <div class="movie-card" data-title="Parasite" data-year="2019" data-rating="8.6" data-genres='["comedy", "drama", "thriller"]'>
+                    <img src="https://via.placeholder.com/200x300/008000/FFFFFF?text=Parasite" alt="Parasite Poster">
+                    <h3>Parasite</h3>
+                    <p class="year">2019</p>
+                    <p class="rating">⭐ 8.6</p>
+                    <div class="genres">
+                       <span>Comedy</span><span>Drama</span><span>Thriller</span>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-title="Pride & Prejudice" data-year="2005" data-rating="7.8" data-genres='["drama", "romance"]'>
+                    <img src="https://via.placeholder.com/200x300/FFC0CB/000000?text=Pride+&+Prejudice" alt="Pride & Prejudice Poster">
+                    <h3>Pride & Prejudice</h3>
+                    <p class="year">2005</p>
+                    <p class="rating">⭐ 7.8</p>
+                    <div class="genres">
+                        <span>Drama</span><span>Romance</span>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-title="Get Out" data-year="2017" data-rating="7.7" data-genres='["horror", "thriller", "mystery"]'>
+                     <img src="https://via.placeholder.com/200x300/8B0000/FFFFFF?text=Get+Out" alt="Get Out Poster">
+                     <h3>Get Out</h3>
+                     <p class="year">2017</p>
+                     <p class="rating">⭐ 7.7</p>
+                     <div class="genres">
+                         <span>Horror</span><span>Thriller</span><span>Mystery</span>
+                     </div>
+                 </div>
+
+                 <div class="movie-card" data-title="La La Land" data-year="2016" data-rating="8.0" data-genres='["comedy", "drama", "romance", "music"]'>
+                     <img src="https://via.placeholder.com/200x300/DA70D6/000000?text=La+La+Land" alt="La La Land Poster">
+                     <h3>La La Land</h3>
+                     <p class="year">2016</p>
+                     <p class="rating">⭐ 8.0</p>
+                     <div class="genres">
+                         <span>Comedy</span><span>Drama</span><span>Romance</span>
+                     </div>
+                 </div>
+
+                  <div class="movie-card" data-title="Blade Runner 2049" data-year="2017" data-rating="8.0" data-genres='["action", "drama", "sci-fi", "thriller"]'>
+                     <img src="https://via.placeholder.com/200x300/00008B/FFFFFF?text=Blade+Runner+2049" alt="Blade Runner 2049 Poster">
+                     <h3>Blade Runner 2049</h3>
+                     <p class="year">2017</p>
+                     <p class="rating">⭐ 8.0</p>
+                     <div class="genres">
+                         <span>Action</span><span>Drama</span><span>Sci-Fi</span>
+                     </div>
+                 </div>
+
+                 <div class="movie-card" data-title="When Harry Met Sally..." data-year="1989" data-rating="7.7" data-genres='["comedy", "drama", "romance"]'>
+                     <img src="https://via.placeholder.com/200x300/ADD8E6/000000?text=When+Harry+Met+Sally" alt="When Harry Met Sally Poster">
+                     <h3>When Harry Met Sally...</h3>
+                     <p class="year">1989</p>
+                     <p class="rating">⭐ 7.7</p>
+                     <div class="genres">
+                         <span>Comedy</span><span>Drama</span><span>Romance</span>
+                     </div>
+                 </div>
+
+                <!-- Add more movie cards here with correct data attributes -->
+
+            </div>
+             <p id="noResultsMessage" class="no-results" style="display: none;">No movies match your criteria. Try adjusting your filters!</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 MovieVerse. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
