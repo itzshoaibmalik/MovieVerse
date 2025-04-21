@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // --- Configuration ---
-  const apiKey = 'YOUR_TMDB_API_KEY'; // <-- PASTE YOUR V3 API KEY HERE!
+  const apiKey = 'eacc73ab9261fcee9b1146019d49d625'; 
   const baseUrl = 'https://api.themoviedb.org/3';
   const baseImageUrl = 'https://image.tmdb.org/t/p/w500'; // Image quality/size
 
