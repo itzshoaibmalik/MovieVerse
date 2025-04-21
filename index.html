@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieVerse - Discover Movies</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Optional: Add a nice font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -14,25 +13,27 @@
 
     <header>
         <div class="container">
-            <a href="#" class="logo">MovieVerse</a>
+            <a href="index.html" class="logo">MovieVerse</a>
             <nav>
                 <ul>
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">Movies</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#">Movies</a></li> <!-- Could link to index.html with specific filters -->
                     <li><a href="#">Genres</a></li>
                     <li><a href="#">TV Shows</a></li>
+                    <li><a href="about.html">About Us</a></li> <!-- Added About Us Link -->
                 </ul>
             </nav>
             <div class="user-actions">
-                <button class="btn btn-secondary">Login</button>
-                <button class="btn btn-primary">Sign Up</button>
+                <!-- Updated Links -->
+                <a href="login.html" class="btn btn-secondary">Login</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
             </div>
-             <!-- Mobile Menu Toggle (Optional) -->
              <button id="mobileMenuToggle" class="mobile-menu-toggle">☰</button>
         </div>
     </header>
 
-    <section class="hero">
+    <!-- (Hero Section remains the same) -->
+     <section class="hero">
         <div class="hero-content container">
             <h1>Discover Your Next Favorite Movie</h1>
             <p>Explore thousands of titles, powered by TMDb.</p>
@@ -43,16 +44,15 @@
         </div>
     </section>
 
+    <!-- (Filter/Sort Controls remain the same) -->
     <section class="filter-sort-controls">
         <div class="container">
             <div class="controls-wrapper">
                 <div class="filters">
                     <div class="filter-group">
                         <label for="genreFilter">Genre:</label>
-                        <!-- Genres will be populated by JS -->
                         <select id="genreFilter">
                             <option value="">All Genres</option>
-                            <!-- Example: <option value="28">Action</option> -->
                         </select>
                     </div>
                     <div class="filter-group">
@@ -93,7 +93,7 @@
         <div id="loadingIndicator" class="loading-indicator">Loading movies...</div>
         <div id="errorMessage" class="error-message" style="display: none;"></div>
         <div id="movieGrid" class="movie-grid">
-            <!-- Movie cards will be dynamically inserted here by JavaScript -->
+            <!-- Movie cards inserted by JS -->
         </div>
         <div id="paginationControls" class="pagination-controls">
             <button id="prevPage" class="btn" disabled>Previous</button>
@@ -102,14 +102,29 @@
         </div>
     </main>
 
+    <!-- Footer remains the same, maybe add About link -->
     <footer>
         <div class="container">
             <p>© <span id="currentYear"></span> MovieVerse. Powered by <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDb</a>.</p>
             <div class="footer-links">
-                <a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms</a>
+                <a href="about.html">About</a> | <a href="#">Contact</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms</a>
             </div>
         </div>
     </footer>
+
+    <!-- ==== MOVIE DETAIL MODAL ==== -->
+    <div id="movieDetailModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close-btn">×</button>
+            <div id="modalBody" class="modal-body">
+                <!-- Content will be loaded here by JS -->
+                <div class="modal-loading">Loading details...</div>
+            </div>
+        </div>
+    </div>
+    <!-- ==== END MODAL ==== -->
+
 
     <script src="script.js"></script>
 </body>
