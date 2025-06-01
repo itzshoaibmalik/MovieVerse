@@ -17,15 +17,10 @@ MovieVerse is a web application designed to help users discover and explore movi
 - **JavaScript**: For interactivity and fetching data from the TMDb API.
 - **TMDb API**: For accessing movie data.
 
-## Setup Instructions
-
-1. Clone the repository to your local machine.
-2. Open `index.html` in your web browser to start using the application.
-
 ## Credits
 
 - **Developer**: Shoaib Malik
-- **Data Source**: [The Movie Database (TMDb)](https://www.themoviedb.org/)
+- **Data Source**: [The Movie Database]
 
 ## License
 
