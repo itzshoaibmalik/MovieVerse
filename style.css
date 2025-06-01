@@ -871,3 +871,21 @@ footer a:hover { color: #fff; }
   .modal-cast-list { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 15px;}
   .cast-member img { width: 60px; height: 60px; }
 }
+
+.user-actions .social-link {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    transition: color 0.3s ease;
+}
+
+.user-actions .social-link:hover {
+    color: #e1306c; /* Instagram brand color */
+}
+
+@media (max-width: 768px) {
+    .user-actions .social-link {
+        margin-right: 0.5rem;
+        font-size: 1.2rem;
+    }
+}
